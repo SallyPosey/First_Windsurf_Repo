@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Mining & Simulation Methods</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
+    <script>
+        async function runExample(method) {
+            const button = document.querySelector(`#${method}-result`).previousElementSibling;
+            const resultDiv = document.querySelector(`#${method}-result .result-content`);
+            button.disabled = true;
+            button.textContent = 'Running...';
+            
+            try {
+                const response = await fetch(`/run_example/${method}`);
+                const data = await response.json();
+                
+                if (data.image) {
+                    resultDiv.innerHTML = `
+                        <img src="${data.image}" alt="${method} result" class="result-image">
+                        <pre class="result-text">${data.text}</pre>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `<pre class="result-text">${data.text}</pre>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<pre class="error-text">Error running example: ${error.message}</pre>`;
+            }
+            
+            button.disabled = false;
+            button.textContent = 'Run Live Example';
+        }
+    </script>
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <h1>Data Mining & Analysis Methods</h1>
+                <ul>
+                    <li><a href="#apriori">Apriori</a></li>
+                    <li><a href="#montecarlo">Monte Carlo</a></li>
+                    <li><a href="#kmeans">K-means</a></li>
+                    <li><a href="#decision-trees">Decision Trees</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" class="container">
+            <div class="hero-content">
+                <h1>Data Mining & Analysis Methods</h1>
+                <p>A Step-by-Step Guide to Essential Algorithms and Techniques</p>
+                <div class="hero-features">
+                    <div class="feature">
+                        <i class="fas fa-code"></i>
+                        <span>Python Examples</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-tasks"></i>
+                        <span>Step-by-Step Guide</span>
+                    </div>
+                    <div class="feature">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Real Applications</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="container about-section">
+            <h2>About Me</h2>
+            <p>Hi! I'm Sal, a data analytics student with a curiosity for software development. When I'm not saving animals I am performing statistical analyses on data like my tortoise's growth metrics (maybe my next project?) Enjoy this snippet into some of what I learned this semester!</p>
+        </section>
+
+        <section id="apriori" class="container">
+            <h2>Apriori</h2>
+            <div class="example-section">
+                <button class="run-example-btn" onclick="runExample('apriori')">Run Live Example</button>
+                <div id="apriori-result" class="example-result">
+                    <div class="result-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="montecarlo" class="container">
+            <h2>Monte Carlo</h2>
+            <div class="example-section">
+                <button class="run-example-btn" onclick="runExample('montecarlo')">Run Live Example</button>
+                <div id="montecarlo-result" class="example-result">
+                    <div class="result-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="kmeans" class="container">
+            <h2>K-means</h2>
+            <div class="example-section">
+                <button class="run-example-btn" onclick="runExample('kmeans')">Run Live Example</button>
+                <div id="kmeans-result" class="example-result">
+                    <div class="result-content"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="decision-trees" class="container">
+            <h2>Decision Trees</h2>
+            <div class="example-section">
+                <button class="run-example-btn" onclick="runExample('decision-trees')">Run Live Example</button>
+                <div id="decision-trees-result" class="example-result">
+                    <div class="result-content"></div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>A Comprehensive Guide to Data Mining Techniques</p>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,6 +1,13 @@
-# My GitHub Portfolio
+# Data Mining & Simulation Methods Tutorial
 
-This is my personal portfolio website hosted on GitHub Pages.
+This is an educational website that explains various data mining and simulation methods with interactive examples. The site covers:
+
+- Apriori Algorithm for Association Rules
+- Monte Carlo Simulations
+- K-means Clustering
+- Decision Trees
+
+Each method includes an interactive example that demonstrates how the algorithm works.
 
 ## How to Deploy
 

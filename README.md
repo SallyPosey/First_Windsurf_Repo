@@ -1,5 +1,7 @@
 # Data Mining & Simulation Methods Tutorial
 
+Link to page: https://sallyposey.github.io/First_Windsurf_Repo/
+
 This is an educational website that explains various data mining and simulation methods with interactive examples. The site covers:
 
 - Apriori Algorithm for Association Rules

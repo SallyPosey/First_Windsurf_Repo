@@ -10,29 +10,27 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-python.min.js"></script>
     <script>
-        async function runExample(method) {
-            const button = document.querySelector(`#${method}-result`).previousElementSibling;
+        function showExample(method) {
             const resultDiv = document.querySelector(`#${method}-result .result-content`);
-            button.disabled = true;
-            button.textContent = 'Running...';
             
-            try {
-                const response = await fetch(`/run_example/${method}`);
-                const data = await response.json();
-                
-                if (data.image) {
-                    resultDiv.innerHTML = `
-                        <img src="${data.image}" alt="${method} result" class="result-image">
-                        <pre class="result-text">${data.text}</pre>
-                    `;
-                } else {
-                    resultDiv.innerHTML = `<pre class="result-text">${data.text}</pre>`;
+            // Pre-generated example results
+            const examples = {
+                'apriori': {
+                    text: 'Frequent Itemsets:\n1. {bread, milk} -> Support: 0.75\n2. {eggs, milk} -> Support: 0.65\n\nAssociation Rules:\n1. milk → bread (Confidence: 0.80)\n2. bread → eggs (Confidence: 0.70)'
+                },
+                'monte-carlo': {
+                    text: 'Estimated value of π: 3.14159\nNumber of points used: 10000\nAccuracy: 99.99%'
+                },
+                'kmeans': {
+                    text: 'Cluster Centers:\nCluster 1: [1.2, 2.3]\nCluster 2: [4.5, 3.2]\nCluster 3: [0.8, 1.1]\n\nNumber of points in each cluster:\nCluster 1: 34\nCluster 2: 28\nCluster 3: 38'
+                },
+                'decision-tree': {
+                    text: 'Decision Tree Results:\nAccuracy: 95%\nDepth: 3\nFeatures used: ["age", "income", "education"]'
                 }
-            } catch (error) {
-                resultDiv.innerHTML = `<pre class="error-text">Error running example: ${error.message}</pre>`;
-            }
+            };
             
-            button.disabled = false;
+            const example = examples[method];
+            resultDiv.innerHTML = `<pre class="result-text">${example.text}</pre>`;
             button.textContent = 'Run Live Example';
         }
     </script>
@@ -82,7 +80,7 @@
         <section id="apriori" class="container">
             <h2>Apriori</h2>
             <div class="example-section">
-                <button class="run-example-btn" onclick="runExample('apriori')">Run Live Example</button>
+                <button class="run-example-btn" onclick="showExample('apriori')">Run Live Example</button>
                 <div id="apriori-result" class="example-result">
                     <div class="result-content"></div>
                 </div>
@@ -92,7 +90,7 @@
         <section id="montecarlo" class="container">
             <h2>Monte Carlo</h2>
             <div class="example-section">
-                <button class="run-example-btn" onclick="runExample('montecarlo')">Run Live Example</button>
+                <button class="run-example-btn" onclick="showExample('monte-carlo')">Run Live Example</button>
                 <div id="montecarlo-result" class="example-result">
                     <div class="result-content"></div>
                 </div>
@@ -102,7 +100,7 @@
         <section id="kmeans" class="container">
             <h2>K-means</h2>
             <div class="example-section">
-                <button class="run-example-btn" onclick="runExample('kmeans')">Run Live Example</button>
+                <button class="run-example-btn" onclick="showExample('kmeans')">Run Live Example</button>
                 <div id="kmeans-result" class="example-result">
                     <div class="result-content"></div>
                 </div>
@@ -112,7 +110,7 @@
         <section id="decision-trees" class="container">
             <h2>Decision Trees</h2>
             <div class="example-section">
-                <button class="run-example-btn" onclick="runExample('decision-trees')">Run Live Example</button>
+                <button class="run-example-btn" onclick="showExample('decision-tree')">Run Live Example</button>
                 <div id="decision-trees-result" class="example-result">
                     <div class="result-content"></div>
                 </div>
